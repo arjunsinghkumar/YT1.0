@@ -22,7 +22,7 @@ def filetotext(pathOfFile):
     return(lineText)
 
 a= []
-a = filetotext("C:/poems/rsc/*.txt")
+a = filetotext("D:/Work/Arjun/YT1.0/rsc/*.txt")
 
 str1 = " "
 
@@ -31,8 +31,11 @@ for element in a[0]:
 
 print(str1)
 
+
+
 class Credits:
     def __init__(self, screen_rect, lst):
+        self.c1=0
         self.srect = screen_rect
         self.lst = lst
         self.size = 30
@@ -59,10 +62,17 @@ class Credits:
     def update(self):
         if pg.time.get_ticks()-self.timer > self.delay: 
             self.timer = pg.time.get_ticks()
-            for text, rect in self.text:
-                rect.y -= 2.5
-                print(rect.y)
+            lt = len(self.text)
+            
 
+            for li in range(0,lt):
+                text,rect = self.text[li]
+                if(rect.y>-40):
+                    rect.y -= 2.5
+                if(li == 64 and rect.y<20):
+                    print("Break NOW!")
+                    self.c1=1;
+            
     def render(self, surf):
         for text, rect in self.text:
             surf.blit(text, rect)    
@@ -76,11 +86,15 @@ running = True
 
 frameSize = (1200, 1000)
 
+
 out = cv2.VideoWriter('output_video.mp4',cv2.VideoWriter_fourcc(*'DIVX'), 30, frameSize)
 
 while running:
     for event in pg.event.get():
         if event.type == QUIT:
+            running = False
+        if cred.c1==1:
+            print("Breaking")
             running = False
     screen.fill((255, 213, 59))
     cred.update()
@@ -88,11 +102,11 @@ while running:
     pg.display.update()
     clock.tick(60)
     # print(str(int(clock.get_fps())))
-    os.chdir("C://poems/rsc")
+    os.chdir("D:/Work/Arjun/YT1.0/rsc")
     pg.image.save(screen,"screen"+".png") 
-    img = cv2.imread('C:/poems/rsc/screen.png')
+    img = cv2.imread('D:/Work/Arjun/YT1.0/screen.png')
     out.write(img)
-    os.remove('C:/poems/rsc/screen.png')
+    os.remove('D:/Work/Arjun/YT1.0/rsc/screen.png')
     out.write(img)
     pg.display.flip()
 
