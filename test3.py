@@ -35,7 +35,6 @@ print(str1)
 
 class Credits:
     def __init__(self, screen_rect, lst):
-        self.c1=0
         self.srect = screen_rect
         self.lst = lst
         self.size = 30
@@ -68,10 +67,12 @@ class Credits:
             for li in range(0,lt):
                 text,rect = self.text[li]
                 if(rect.y>-40):
-                    rect.y -= 2.5
-                if(li == 64 and rect.y<20):
+                    rect.y -= 10
+                if(li == 64 and rect.y<-30):
                     print("Break NOW!")
-                    self.c1=1;
+                    pg.quit()
+                    exit(0);
+                    
             
     def render(self, surf):
         for text, rect in self.text:
@@ -93,20 +94,18 @@ while running:
     for event in pg.event.get():
         if event.type == QUIT:
             running = False
-        if cred.c1==1:
-            print("Breaking")
-            running = False
+            
     screen.fill((255, 213, 59))
     cred.update()
     cred.render(screen)
     pg.display.update()
     clock.tick(60)
     # print(str(int(clock.get_fps())))
-    os.chdir("D:/Work/Arjun/YT1.0/rsc")
+    os.chdir("D:/Work/Arjun/kingversion")
     pg.image.save(screen,"screen"+".png") 
-    img = cv2.imread('D:/Work/Arjun/YT1.0/screen.png')
+    img = cv2.imread('D:/Work/Arjun/kingversion/screen.png')
     out.write(img)
-    os.remove('D:/Work/Arjun/YT1.0/rsc/screen.png')
+    os.remove('D:/Work/Arjun/kingversion/screen.png')
     out.write(img)
     pg.display.flip()
 
