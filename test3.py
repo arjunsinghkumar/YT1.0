@@ -68,7 +68,8 @@ class Credits:
                 text,rect = self.text[li]
                 if(rect.y>-40):
                     rect.y -= 10
-                if(li == 64 and rect.y<-30):
+                
+                if(li == lt-1 and rect.y<-30):
                     print("Break NOW!")
                     pg.quit()
                     exit(0);
